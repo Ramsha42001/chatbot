@@ -1,19 +1,20 @@
 .popup {
     position: fixed;
-    bottom: 90px;
-    right: 30px;
-    width: 350px; 
-    height: 540px;
+    bottom: 0; /* Stick to the iframe’s bottom */
+    right: 0;  /* Stick to the iframe’s right edge */
+    width: 100%; /* Fill entire iframe width */
+    height: 100%; /* Fill entire iframe height */
     background-color: rgba(0, 0, 0, 0.85);
-    border-radius: 12px; 
+    border-radius: 12px;
     padding: 15px;
     color: white;
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5); 
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
     z-index: 60000;
     opacity: 0;
     transform: scale(0.8);
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
 
 /* Popup open state */
 .popupOpen {
@@ -54,6 +55,13 @@
     border-radius: 50%; 
     border: 2px solid #ffffff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); 
+}
+
+@media (max-width: 768px) {
+    .popup {
+        width: 90%; /* Adjust width for smaller screens */
+        height: 80%; /* Adjust height */
+    }
 }
 
 /* 
