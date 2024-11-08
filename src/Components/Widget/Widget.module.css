@@ -1,38 +1,22 @@
-/* Widget styling */
-.widget {
-    user-select: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.widget:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
-}
-
-/* Popup styling */
 .popup {
     position: fixed;
     bottom: 90px;
     right: 30px;
-    width: 300px; 
-    min-height: 70vh;
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 8px;
-    padding: 5px;
+    width: 350px; 
+    min-height: 40vh;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.85);
+    border-radius: 12px; 
+    padding: 15px;
     color: white;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    z-index: 20;
-
-    /* Initial state for animation */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5); 
+    z-index: 60000;
     opacity: 0;
     transform: scale(0.8);
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+/* Popup open state */
 .popupOpen {
     opacity: 1;
     transform: scale(1);
@@ -40,31 +24,74 @@
 
 .popupContent {
     position: relative;
-    background-color: #fff;
-    padding: 10px;
+    background-color: #ffffff; 
+    padding: 20px; 
     border-radius: 8px;
     height: 60vh;
     overflow-y: auto;
     color: #333;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); 
 }
 
+/* Close button styles */
 .closeButton {
     position: absolute;
-    top: 5px;
-    right: 10px;
-    font-size: 20px;
+    top: 10px; 
+    right: 15px;
+    font-size: 24px; 
     cursor: pointer;
-    color: #333;
-    transition: color 0.3s ease;
+    color: #ffffff; 
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .closeButton:hover {
-    color: #007bff;
+    transform: scale(1.1); 
 }
 
-.image 
-{
-    width: 70px;
-    height: 70px;
-    border-radius: 100%;
+
+.image {
+    width: 60px; 
+    height: 60px;
+    border-radius: 50%; 
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); 
+}
+
+
+@media (max-width: 768px) {
+    .popup {
+        width: 80%;
+        right: 10%;
+        bottom: 80px;
+    }
+
+    .popupContent {
+        padding: 15px;
+        height: auto; 
+    }
+
+    .closeButton {
+        font-size: 20px; 
+    }
+
+    .image {
+        width: 50px; 
+        height: 50px;
+    }
+}
+
+@media (max-width: 576px) {
+    .popup {
+        width: 90%; 
+        right: 5%; 
+    }
+
+    .closeButton {
+        font-size: 18px;
+    }
+
+    .image {
+        width: 50px; 
+        height: 50px;
+    }
 }
