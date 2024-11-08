@@ -7,9 +7,9 @@ const Widget = () => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [messages, setMessages] = useState([
         { sender: "bot", text: "Hello! How can I assist you today?" },
-        { sender: "user", text: "I need help with my account." },
-        { sender: "bot", text: "Sure, I can help with that. Can you tell me more about the issue?" }
     ]);
+
+    
     const [newMessage, setNewMessage] = useState("");
 
     const openPopup = () => setIsPopupOpen(true);
