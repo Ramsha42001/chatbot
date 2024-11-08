@@ -1,0 +1,70 @@
+/* Widget styling */
+.widget {
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.widget:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Popup styling */
+.popup {
+    position: fixed;
+    bottom: 90px;
+    right: 30px;
+    width: 300px; 
+    min-height: 70vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    padding: 5px;
+    color: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 20;
+
+    /* Initial state for animation */
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.popupOpen {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.popupContent {
+    position: relative;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    height: 60vh;
+    overflow-y: auto;
+    color: #333;
+}
+
+.closeButton {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.closeButton:hover {
+    color: #007bff;
+}
+
+.image 
+{
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+}
