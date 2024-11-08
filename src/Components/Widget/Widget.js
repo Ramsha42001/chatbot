@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import WidgetCss from "./Widget.module.css";
-import ChatImage from "./image.png";
+import ChatImage from "./fai1.png";
 
 const Widget = () => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -34,14 +34,27 @@ const Widget = () => {
         }
     };
 
+    const handleKeyPress = (e) => {
+        if (e.key === "Enter") {
+            handleSendMessage();
+        }
+    };
+
     return (
         <div className={WidgetCss.container}>
             <div
                 className={WidgetCss.chatIcon}
                 onClick={openPopup}
             >
+                {!isPopupOpen && (
+               <div className={WidgetCss.tooltip}>
+               How can I help you?
+           </div>
+            )}
                 <img className={WidgetCss.image} src={ChatImage} alt="Chat Icon" />
             </div>
+
+            
 
             {isPopupOpen && (
                 <div className={`${WidgetCss.popup} ${isPopupOpen ? WidgetCss.popupOpen : ""}`}>
@@ -68,6 +81,7 @@ const Widget = () => {
                             type="text"
                             value={newMessage}
                             onChange={(e) => setNewMessage(e.target.value)}
+                            onKeyPress={handleKeyPress} 
                             placeholder="Type a message..."
                             className={WidgetCss.input}
                         />
