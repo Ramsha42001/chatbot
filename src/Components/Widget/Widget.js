@@ -36,7 +36,6 @@ const Widget = () => {
 
     return (
         <div className={WidgetCss.container}>
-            {/* Chat icon button to open popup */}
             <div
                 className={WidgetCss.chatIcon}
                 onClick={openPopup}
@@ -44,7 +43,6 @@ const Widget = () => {
                 <img className={WidgetCss.image} src={ChatImage} alt="Chat Icon" />
             </div>
 
-            {/* Chatbot Popup */}
             {isPopupOpen && (
                 <div className={`${WidgetCss.popup} ${isPopupOpen ? WidgetCss.popupOpen : ""}`}>
                     <div className={WidgetCss.popupHeader}>
@@ -54,7 +52,6 @@ const Widget = () => {
                         </span>
                     </div>
 
-                    {/* Message display area */}
                     <div className={WidgetCss.popupContent}>
                         {messages.map((message, index) => (
                             <div
@@ -66,7 +63,6 @@ const Widget = () => {
                         ))}
                     </div>
 
-                    {/* Message input area */}
                     <div className={WidgetCss.messageInputArea}>
                         <input
                             type="text"
