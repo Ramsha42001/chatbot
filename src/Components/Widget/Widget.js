@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios"; 
+import axios from "axios";
 import WidgetCss from "./Widget.module.css";
 import ChatImage from "./image.png";
 
@@ -8,8 +8,6 @@ const Widget = () => {
     const [messages, setMessages] = useState([
         { sender: "bot", text: "Hello! How can I assist you today?" },
     ]);
-
-    
     const [newMessage, setNewMessage] = useState("");
 
     const openPopup = () => setIsPopupOpen(true);
@@ -17,16 +15,14 @@ const Widget = () => {
 
     const handleSendMessage = async () => {
         if (newMessage.trim()) {
-            
             const userMessage = { sender: "user", text: newMessage };
             setMessages(prevMessages => [...prevMessages, userMessage]);
-            setNewMessage(""); 
+            setNewMessage("");
 
             try {
-                const messageQuery = encodeURIComponent(newMessage); 
+                const messageQuery = encodeURIComponent(newMessage);
                 const response = await axios.get(`https://rapidbot-2327227512.us-central1.run.app/api/chat?message=${messageQuery}`);
 
-                
                 const botMessage = { sender: "bot", text: response.data.text || "I'm here to assist you!" };
                 setMessages(prevMessages => [...prevMessages, botMessage]);
 
@@ -39,99 +35,56 @@ const Widget = () => {
     };
 
     return (
-        <>
+        <div className={WidgetCss.container}>
+            {/* Chat icon button to open popup */}
             <div
-                style={{
-                    position: "fixed",
-                    bottom: "40px",
-                    right: "40px",
-                    cursor: "pointer",
-                    width: "10px",
-                    height: "10px",
-                    backgroundColor: "#007bff",
-                    borderRadius: "50%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "white",
-                    fontSize: "24px",
-                    zIndex: 10,
-                }}
+                className={WidgetCss.chatIcon}
                 onClick={openPopup}
-                className={WidgetCss.widget}
             >
                 <img className={WidgetCss.image} src={ChatImage} alt="Chat Icon" />
             </div>
 
-            <div className={`${WidgetCss.popup} ${isPopupOpen ? WidgetCss.popupOpen : ""}`}>
-                <div className={WidgetCss.popupHeader}>
-                    <span>Chatbot Assistant</span>
-                    <span className={WidgetCss.closeButton} onClick={closePopup}>
-                        &times;
-                    </span>
-                </div>
-                <div className={WidgetCss.popupContent} style={{
-                    padding: "10px",
-                    overflowY: "auto",
-                    flexGrow: 1,
-                    borderTop: "1px solid #ddd",
-                    borderBottom: "1px solid #ddd",
-                }}>
-                    {messages.map((message, index) => (
-                        <div
-                            key={index}
-                            style={{
-                                display: "flex",
-                                justifyContent: message.sender === "user" ? "flex-end" : "flex-start",
-                                marginBottom: "8px"
-                            }}
-                        >
+            {/* Chatbot Popup */}
+            {isPopupOpen && (
+                <div className={`${WidgetCss.popup} ${isPopupOpen ? WidgetCss.popupOpen : ""}`}>
+                    <div className={WidgetCss.popupHeader}>
+                        <span>Chatbot Assistant</span>
+                        <span className={WidgetCss.closeButton} onClick={closePopup}>
+                            &times;
+                        </span>
+                    </div>
+
+                    {/* Message display area */}
+                    <div className={WidgetCss.popupContent}>
+                        {messages.map((message, index) => (
                             <div
-                                style={{
-                                    backgroundColor: message.sender === "user" ? "#007bff" : "#f1f0f0",
-                                    color: message.sender === "user" ? "white" : "black",
-                                    padding: "8px 12px",
-                                    borderRadius: "16px",
-                                    maxWidth: "80%",
-                                    textAlign: "left"
-                                }}
+                                key={index}
+                                className={`${WidgetCss.message} ${message.sender === "user" ? WidgetCss.userMessage : WidgetCss.botMessage}`}
                             >
                                 {message.text}
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
+
+                    {/* Message input area */}
+                    <div className={WidgetCss.messageInputArea}>
+                        <input
+                            type="text"
+                            value={newMessage}
+                            onChange={(e) => setNewMessage(e.target.value)}
+                            placeholder="Type a message..."
+                            className={WidgetCss.input}
+                        />
+                        <button
+                            onClick={handleSendMessage}
+                            className={WidgetCss.sendButton}
+                        >
+                            Send
+                        </button>
+                    </div>
                 </div>
-                <div style={{ display: "flex", padding: "10px", borderTop: "1px solid #ddd" }}>
-                    <input
-                        type="text"
-                        value={newMessage}
-                        onChange={(e) => setNewMessage(e.target.value)}
-                        placeholder="Type a message..."
-                        style={{
-                            flex: 1,
-                            padding: "8px",
-                            border: "1px solid #ddd",
-                            borderRadius: "16px",
-                            outline: "none"
-                        }}
-                    />
-                    <button
-                        onClick={handleSendMessage}
-                        style={{
-                            marginLeft: "8px",
-                            padding: "8px 12px",
-                            backgroundColor: "#007bff",
-                            color: "white",
-                            border: "none",
-                            borderRadius: "16px",
-                            cursor: "pointer"
-                        }}
-                    >
-                        Send
-                    </button>
-                </div>
-            </div>
-        </>
+            )}
+        </div>
     );
 };
 
